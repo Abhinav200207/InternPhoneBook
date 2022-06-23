@@ -2,7 +2,15 @@ const Phone = require('../model/model');
 
 exports.get = async (req, res) => {
     try {
-        const phone = await Phone.find();
+        const keyword = req.query.keyword
+            ? {
+                first: {
+                    $regex: req.query.keyword,
+                    $options: "i",
+                },
+            }
+            : {};
+        const phone = await Phone.find({ ...keyword });
         res.status(200).json(phone);
     } catch (error) {
         res.status(500).json({
@@ -34,6 +42,20 @@ exports.update = async (req, res) => {
 
 exports.deleteContact = async (req, res) => {
     try {
+        const phone = await Phone({ _id: req.query.id });
+
+        if (!phone) {
+            return res.status(500).json({
+                message: error.message
+            });
+        }
+
+        await Phone.findByIdAndDelete(req.query.id);
+
+        res.status(200).json({
+            success:true,
+            message:"deleted sucessully"
+        })
 
     } catch (error) {
         res.status(500).json({

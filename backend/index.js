@@ -3,7 +3,7 @@ const connectDatabase = require('./db/db');
 const chalk = require('chalk');
 const app = express();
 
-const PORT = 3000;
+const PORT = 4000;
 
 app.use(express.json());
 

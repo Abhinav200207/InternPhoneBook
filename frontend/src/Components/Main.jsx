@@ -1,15 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { InputAdornment } from '@mui/material'
 import './Main.css'
 import Phone from './Phone';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from '../Actions/action';
 
 const Main = () => {
+    const { message, loading } = useSelector(state => state.phonereducer)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getContacts(""));
+    }, [dispatch]);
+
+    const searchChange = (e) => {
+        dispatch(getContacts(e.target.value));
+    }
+
     return (
         <div className="main">
             <TextField
-                style={{"marginBottom":"2%"}}
+                onChange={(e) =>searchChange(e)}
+                style={{ "marginBottom": "2%" }}
                 fullWidth
                 id="filled-textarea"
                 label="Search Contacts"
@@ -24,15 +37,11 @@ const Main = () => {
                 }}
                 variant="filled"
             />
-            <Phone />
-            <Phone />
-            <Phone />
-            <Phone />
-            <Phone />
-            <Phone />
-            <Phone />
-            <Phone />
-            <Phone />
+            {loading === true ? (<div>Hello</div>) : (
+                message && message.length > 0 ? (
+                    message.map((data) => <Phone key={data._id} id={data._id} first={data.first} last={data.last} number={data.number} />)
+                ) : (<div>Nothing To show</div>)
+            )}
         </div>
     )
 }
