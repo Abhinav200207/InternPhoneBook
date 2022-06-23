@@ -11,7 +11,7 @@ exports.get = async (req, res) => {
             }
             : {};
         const phone = await Phone.find({ ...keyword });
-        res.status(200).json(phone);
+        res.status(200).json(phone.reverse());
     } catch (error) {
         res.status(500).json({
             message: error.message

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import { InputAdornment } from '@mui/material'
+import { CircularProgress, InputAdornment } from '@mui/material'
 import './Main.css'
 import Phone from './Phone';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,7 +37,7 @@ const Main = () => {
                 }}
                 variant="filled"
             />
-            {loading === true ? (<div>Hello</div>) : (
+            {loading === true ? (<CircularProgress color="success" />) : (
                 message && message.length > 0 ? (
                     message.map((data) => <Phone key={data._id} id={data._id} first={data.first} last={data.last} number={data.number} />)
                 ) : (<div>Nothing To show</div>)

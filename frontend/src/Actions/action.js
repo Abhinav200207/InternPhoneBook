@@ -29,3 +29,14 @@ export const deleteContacts = (id) => async (dispatch) => {
         });
     }
 };
+
+export const createContact = (first, last, number) => async (dispatch) => {
+    try {
+        await axios.post(`/create`, { first, last, number }, { headers: { 'Content-Type': 'application/json' } })
+    } catch (error) {
+        dispatch({
+            type: "ALL_PHONE_FAIL",
+            payload: error.response.data,
+        });
+    }
+}

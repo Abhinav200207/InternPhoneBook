@@ -1,4 +1,7 @@
 .main{
     margin-left:8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-right:8%;
 }
