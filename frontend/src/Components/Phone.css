@@ -1,0 +1,9 @@
+.phone {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2px;
+    height: 70px;
+    background-color: rgba(128, 128, 128, 0.155);
+}
