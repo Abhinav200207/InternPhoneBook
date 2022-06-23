@@ -18,7 +18,7 @@
 
 - In second terminal enter
   ```sh
-  cn frontend
+  cd frontend
   npm install
   npm start
   ```
